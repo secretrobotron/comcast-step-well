@@ -61,5 +61,40 @@
     <audio preload="auto">
       <source src="assets/audio/DR0000_0059.wav.mp3" type="audio/mp3"></source>
     </audio>
+    <script>
+      (function () {
+        var items = Array.prototype.slice.call(document.querySelectorAll('img')).concat(Array.prototype.slice.call(document.querySelectorAll('audio')));
+        var onDone = null;
+
+        function check() {
+          if (window._loader.items == window._loader.loaded) {
+            setTimeout(onDone, 10);
+          }
+          window._loader.onUpdate && window._loader.onUpdate(window._loader.loaded / window._loader.items);
+        }
+
+        window._loader = {
+          items: items.length,
+          loaded: 0,
+          onUpdate: null,
+          callWhenDone: function (callback) {
+            onDone = callback;
+            check();
+          }
+        };
+
+        items.forEach(function (item) {
+          item.onload = function (e) {
+            window._loader.loaded++;
+            check();
+          };
+
+          item.onloadedmetadata = function (e) {
+            window._loader.loaded++;
+            check();
+          };
+        });
+      })();
+    </script>
   </body>
 </html>
