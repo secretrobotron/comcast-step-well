@@ -38,11 +38,11 @@ html, body {
 }
 
 #title {
-  bottom: 4rem;
-  font-size: 3em;
+  bottom: 3rem;
 }
 
 #subtitle {
   bottom: 2rem;
   text-transform: uppercase;
+  font-size: 0.5em;
 }

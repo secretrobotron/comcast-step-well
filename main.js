@@ -58,23 +58,22 @@
       imageToPrepare.classList.add('ready');
       imageToPrepare.classList.remove('show');
 
-      imageContainer.appendChild(imageToShow);
-      setTimeout(function () {
-        imageToShow.classList.add('show');
-      }, 50);
-
+      imageContainer.appendChild(imageToPrepare);
+      imageToShow.classList.add('show');
 
       // Try to compensate for Chrome not updating gfx properly.
-      shownImages[4] = shownImages[3];
-      shownImages[3] = shownImages[2];
-      shownImages[2] = shownImages[1];
-      shownImages[1] = shownImages[0];
-      shownImages[0] = imageToShow;
+      var imageStackSize = 6;
 
-      if (shownImages[4]) {
-        shownImages[4].classList.remove('show');
-        shownImages[4].classList.remove('ready');
-        imageContainer.removeChild(shownImages[4]);
+      for (var i = imageStackSize - 1; i > 0; --i) {
+        shownImages[i] = shownImages[i-1];
+      }
+
+      shownImages[0] = imageToPrepare;
+
+      if (shownImages[imageStackSize - 1]) {
+        shownImages[imageStackSize - 1].classList.remove('show');
+        shownImages[imageStackSize - 1].classList.remove('ready');
+        imageContainer.removeChild(shownImages[imageStackSize - 1]);
       }
 
       setTimeout(showNextImage, 800);
