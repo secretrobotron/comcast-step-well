@@ -1,13 +1,11 @@
 (function () {
 
-  document.addEventListener('DOMContentLoaded', function (e) {
+  function start (e) {
     var audioElements = document.querySelectorAll('audio');
-    var imageElements = document.querySelectorAll('.image');
-    var imageContainer = document.querySelector('.image').parentNode;
+    var imageElements = document.querySelectorAll('img');
+    var imageContainer = document.querySelector('img').parentNode;
 
     imageElements = Array.prototype.slice.call(imageElements);
-
-    console.log(imageElements);
 
     function playNextAudio() {
       // Pick a random audio element, and clone it for playing.
@@ -46,6 +44,15 @@
       imageContainer.removeChild(imageElement);
     });
 
+    imageElements = imageElements.map(function (imageElement) {
+      var div = document.createElement('div');
+      div.classList.add('image');
+      div.style.backgroundImage = 'url(\'' + imageElement.src + '\')';
+      return div;
+    });
+
+    console.log(imageElements);
+
     var imageIndex = 0;
     var shownImages = [];
     function showNextImage() {
@@ -81,6 +88,12 @@
 
     showNextImage();
     playNextAudio();
-  });
+  }
+
+  document.onreadystatechange = function (e) {
+    if (document.readyState === 'complete') {
+      start();
+    }
+  };
 
 })();
