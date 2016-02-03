@@ -1,0 +1,48 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Open Sans';
+  background-color: black;
+  color: white;
+}
+
+.image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.image.ready {
+  opacity: 0;
+  visibility: visible;
+}
+
+.image.show {
+  opacity: 1;
+  transition: opacity 2s;
+  transition-timing-function: ease-in-out;
+}
+
+#title, #subtitle {
+  position: absolute;
+  right: 2rem;
+  text-align: right;
+  color: rgb(200, 200, 200);
+}
+
+#title {
+  bottom: 4rem;
+  font-size: 3em;
+}
+
+#subtitle {
+  bottom: 2rem;
+  text-transform: uppercase;
+}
