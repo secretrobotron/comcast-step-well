@@ -70,13 +70,12 @@
           if (window._loader.items == window._loader.loaded) {
             setTimeout(onDone, 10);
           }
-          window._loader.onUpdate && window._loader.onUpdate(window._loader.loaded / window._loader.items);
+          document.querySelector('#loading').textContent = 'Loading ' + Math.round(window._loader.loaded / window._loader.items*100);
         }
 
         window._loader = {
           items: items.length,
           loaded: 0,
-          onUpdate: null,
           callWhenDone: function (callback) {
             onDone = callback;
             check();

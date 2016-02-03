@@ -92,13 +92,6 @@
     playNextAudio();
   }
 
-  document.addEventListener('DOMContentLoaded', function (e) {
-    // window._loader.callWhenDone(start);
-    window._loader.onUpdate = function (p) {
-      document.querySelector('#loading').textContent = 'Loading ' + Math.round(p*100);
-    };
-  });
-
   document.onreadystatechange = function (e) {
     if (document.readyState === 'complete') {
       start();
