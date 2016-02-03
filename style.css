@@ -34,11 +34,17 @@ img {
   transition-timing-function: ease-in-out;
 }
 
-#title, #subtitle {
+#title, #subtitle, #loading {
   position: absolute;
   right: 2rem;
   text-align: right;
   color: rgb(200, 200, 200);
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+#title.show, #subtitle.show {
+  opacity: 1;
 }
 
 #title {
@@ -49,4 +55,14 @@ img {
   bottom: 2rem;
   text-transform: uppercase;
   font-size: 0.5em;
+}
+
+#loading {
+  bottom: 3rem;
+  opacity: 1;
+  transition: opacity 2s;
+}
+
+#loading.hide {
+  opacity: 0;
 }

@@ -7,6 +7,10 @@
 
     imageElements = Array.prototype.slice.call(imageElements);
 
+    document.querySelector('#loading').classList.add('hide');
+    document.querySelector('#title').classList.add('show');
+    document.querySelector('#subtitle').classList.add('show');
+
     function playNextAudio() {
       // Pick a random audio element, and clone it for playing.
       var nextAudio = audioElements[Math.floor(Math.random() * audioElements.length)];
