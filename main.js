@@ -1,3 +1,6 @@
+// By Bobby Richter and Laura de Reynal
+// License: MIT & CC-NonCommercial
+
 (function () {
 
   function start (e) {
