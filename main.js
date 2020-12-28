@@ -3,14 +3,43 @@
 
 (function () {
 
-  function start (e) {
+  let startButton, startContainer;
+
+  function getReady(e) {
+    startContainer = document.querySelector('#start-container');
+    startButton = document.querySelector('#start-button');
+    startContainer.removeChild(startButton);
+  }
+
+  function ready(e) {
+    let loadingBlock = document.querySelector('#loading');
+    loadingBlock.classList.add('hide');
+
+    setTimeout(e => {
+      startContainer.removeChild(loadingBlock);
+      startContainer.appendChild(startButton);
+      setTimeout(e => {
+        startButton.classList.add('show');
+      }, 100)
+    }, 1000);
+
+    startButton.addEventListener('click', function onStartButtonClick(e) {
+      startButton.removeEventListener('click', onStartButtonClick);
+      startButton.classList.remove('show');
+      setTimeout(e => {
+        startContainer.parentNode.removeChild(startContainer);
+        start();
+      }, 2000);
+    });
+  }
+
+  function start(e) {
     var audioElements = document.querySelectorAll('audio');
     var imageElements = document.querySelectorAll('img');
     var imageContainer = document.querySelector('img').parentNode;
 
     imageElements = Array.prototype.slice.call(imageElements);
 
-    document.querySelector('#loading').classList.add('hide');
     document.querySelector('#title').classList.add('show');
     document.querySelector('#subtitle').classList.add('show');
 
@@ -20,7 +49,7 @@
       nextAudio = nextAudio.cloneNode(true);
 
       // Wait for current audio to be 90% done, and start another.
-      function onTimeUpdate (e) {
+      function onTimeUpdate(e) {
         if (nextAudio.currentTime > nextAudio.duration * 0.9) {
           playNextAudio();
           nextAudio.removeEventListener('timeupdate', onTimeUpdate);
@@ -96,8 +125,11 @@
   }
 
   document.onreadystatechange = function (e) {
-    if (document.readyState === 'complete') {
-      start();
+    if (document.readyState === 'interactive') {
+      getReady();
+    }
+    else if (document.readyState === 'complete') {
+      ready();
     }
   };
 

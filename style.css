@@ -19,6 +19,33 @@ img {
   visibility: hidden;
 }
 
+#start-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+#start-button {
+  padding: 1em;
+  border-radius: 3px;
+  font-family: 'Open Sans';
+  opacity: 0;
+  transition: opacity 2s, background-color .5s, color .5s;
+  user-select: none;
+}
+
+#start-button:hover {
+  background-color: white;
+  color: black;
+}
+
+#start-button.show {
+  opacity: 1;
+  cursor: pointer;
+}
+
 .image {
   position: absolute;
   width: 100%;
@@ -41,7 +68,7 @@ img {
   transition-timing-function: ease-in-out;
 }
 
-#title, #subtitle, #loading {
+#title, #subtitle {
   position: absolute;
   right: 2rem;
   text-align: right;
@@ -67,7 +94,7 @@ img {
 #loading {
   bottom: 3rem;
   opacity: 1;
-  transition: opacity 2s;
+  transition: opacity 1s;
 }
 
 #loading.hide {
